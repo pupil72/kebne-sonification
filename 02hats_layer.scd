@@ -1,6 +1,4 @@
 (
-~tempo = TempoClock(64 / 60);
-//s.record;
 {
 	var totData = [ Ref(0), Ref(0), Ref(0) ]; // [procs, memusage, IBtx]
 	var tempBatch = nil!3; // [procs, memusage, IBtx]
@@ -20,7 +18,7 @@
 	var buildPattern = {
 		var hats_hit = Pbind(
 			\instrument, \open_hats,
-			\amp, Pfunc({ ~amps[2].value }), //~amps[2].value
+			\amp, Pfunc({ ~amps[2].value }),
 			\delayOn, Pfunc({ delayOn.value }),
 			\iodelayAmp, Pif(~applyPatternVariations[2], Pfunc({ batchData[2].value }), 0)
 		);

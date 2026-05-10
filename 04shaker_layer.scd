@@ -1,6 +1,4 @@
 (
-~tempo = TempoClock(64 / 60);
-//s.record;
 {
 	var totData = [ Ref(0), Ref(0), Ref(0) ]; // [procs, memusage, IBtx]
 	var tempBatch = nil!3; // [procs, memusage, IBtx]
@@ -156,7 +154,6 @@
 		};
 		if (~player_playing[4])
 		{~shaker_player = buildPattern.().play(~tempo, quant: 0)};
-		//~shaker_player = buildPattern.().play(~tempo, quant: 0.5);
 	};
 
 	SynthDef(\shaker, {
@@ -180,8 +177,6 @@
 		sig = Pan2.ar(sig, -0.1);
 		Out.ar(~main_bus, sig * env * amp);
 	}).add;
-
-	//~updateShaker.();
 
 }.value;
 )

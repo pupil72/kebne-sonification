@@ -1,6 +1,4 @@
 (
-~tempo = TempoClock(64 / 60);
-//s.record;
 {
 	var totData = [ Ref(0), Ref(0), Ref(0) ]; // [procs, memusage, IBtx]
 	var tempBatch = nil!3; // [procs, memusage, IBtx]

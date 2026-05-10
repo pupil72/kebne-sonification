@@ -1,6 +1,4 @@
 (
-~tempo = TempoClock(64 / 60);
-//s.record;
 {
 	var totData = [ Ref(0), Ref(0), Ref(0), Ref(0) ]; // [procs, thermal, memusage, IBtx]
 	var tempBatch = nil!4; // [procs, thermal, memusage, IBtx]
@@ -83,7 +81,6 @@
 	};
 
 	var maybeUpdateKick = {
-		//"".postln;
 		("/*kick batch_count" + batch_count ++ "*/").postln;
 
 		totData.do{|ref, i|
@@ -104,8 +101,6 @@
 
 		if ((batch_count >= window) && (batch_count.mod(~amount * cycle) == 0)){
 			calculateData.();
-
-			//("data:" + batchData).postln;
 
 			if (batchData[0].value < 0.1) //play echo
 			{
@@ -187,8 +182,6 @@
 		sig = Pan2.ar(sig, -0.5);
 		Out.ar(~main_bus, sig * env * amp);
 	}).add;
-
-	//~updateKick.();
 
 }.value;
 )

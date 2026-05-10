@@ -3,6 +3,8 @@ Buffer.freeAll;
 s.options.memSize = 2.pow(20);
 s.recHeaderFormat = "caf";
 s.recSampleFormat = "int16";
+~tempo = TempoClock(64 / 60);
+~root = 60;
 s.waitForBoot({
 	var broadcastToHandlers;
 
@@ -51,13 +53,12 @@ s.waitForBoot({
 		arg amp, in, out;
 		var sig;
 		sig = In.ar(in, 2);
-		//sig = Splay.ar(sig, 0.5);
 		Out.ar(out, sig * amp);
 	}).add;
 
 	s.sync;
 
-	//CREATE SYNTHS
+	//CREATE SYNTH
 	~main_out = Synth.new(\main_out, [\in, ~main_bus, \out, 0, \amp, 1], addAction: \addToTail);
 
 	s.sync;
@@ -75,12 +76,8 @@ s.waitForBoot({
 		~updateChords.();
 		~updateMVoice.();
 	});
-
-//s.plotTree
 });
 )
-
-//NetAddr.langPort
 
 
 

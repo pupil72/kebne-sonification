@@ -1,6 +1,4 @@
 (
-~tempo = TempoClock(64 / 60);
-~root = 60;
 {
 	var totData = [ Ref(0), Ref(0), Ref(0) ]; // [procs, memusage, IBtx]
 	var tempBatch = nil!3; // [procs, memusage, IBtx]
@@ -36,7 +34,7 @@
 			\octave, 0,
 			\root, ~root,
 			\legato, 0.151,
-			\amp, Pfunc({ ~amps[8].value }), // ~amps[7].value
+			\amp, Pfunc({ ~amps[8].value }),
 		);
 		makeChordsPattern.(batchData[0].value, batchData[1].value, chords_sound);
 	};
@@ -110,7 +108,6 @@
 	};
 
 	var maybeUpdateChords = {
-		//"".postln;
 		("/*chords batch_count" + batch_count ++ "*/").postln;
 
 		totData.do{|ref, i|
@@ -215,127 +212,3 @@
 
 }.value;
 )
-
-/*
-(
-~tempo = TempoClock(64 / 60);
-s.waitForBoot({
-var reverb;
-var chordsBus = Bus.new(s);
-
-SynthDef(\chords, {
-arg freq = 261.62, amp = 0.2, bigness = 0.5;
-var sig, env, filter;
-env = Env.perc(0.01, 0.15).kr(2);
-sig = Mix.fill(4, {	VarSaw.ar(freq *
-(1 + LFNoise1.kr(0.5).range(-0.01, 0.01)), width: bigness) }) / 4;
-//filter = RLPF.ar(sig, 1200, 0.1);
-//sig = XFade2.ar(sig, filter, SinOsc.kr(1.5).range(0,0.5)); //sort of flanger
-//sig = XFade2.ar(sig, filter, 0.5).clip();
-sig = Pan2.ar(sig);
-Out.ar(chordsBus, sig * env * 0.2);
-}).add;
-
-SynthDef(\reverb, {
-arg iodelayAmp = 0.8, delayOn = 0;
-var env, sig, sig2, iodelay, delayed;
-var delayTime = 64/60/8;
-sig = In.ar(chordsBus,2);
-
-delayed = LocalIn.ar(1);
-sig2 = sig + delayed;
-delayed = CombC.ar(sig2, 0.3, 0.2);
-LocalOut.ar(delayed);
-
-sig = Select.ar(delayOn, [sig, sig + delayed * env]);
-iodelay = DelayN.ar(sig, delayTime, delayTime);
-iodelay = FreeVerb.ar(iodelay, iodelayAmp, iodelayAmp, iodelayAmp);
-sig = sig + (iodelay * iodelayAmp);
-Out.ar(0, sig);
-}).add;
-
-s.sync;
-
-//reverb = Synth(\reverb);
-
-~reverbPattern = Pbind(
-\instrument, \reverb,
-\dur, inf,
-).play;
-
-~pattern = Pbind(
-\instrument, \chords,
-\octave, 0,
-\root, 60,
-\note, Pseq([
-[-4, 0, 3, 7],
-[-2, 2, 5],
-[0, 3, 7],
-[3, 7, 10],
-], inf),
-\dur, 1,
-\legato, 0.151,
-\ampmod, 0.4,
-\lpfFreq, Pwhite(1500, 2000),
-).play(~tempo);
-});
-)
-*/
-
-/*
-(
-var bassPattern = [
-(dur: 1, note: -7), (dur: 1, note: -7), (dur: 1, note: -5),
-(dur: 1, note: -4), (dur: 1, note: -4), (dur: 1, note: -5),
-(dur: 1, note: -5), (dur: 1, note: -7), (dur: 1, note: -5)
-];
-
-var bassPositions = [1, 3, 4, 6, 7, 10, 12, 13, 14];
-var chordsPositions = [0, 2, 3, 5, 6, 7, 11, 12];
-
-var dict = IdentityDictionary[
--7 -> [-4, 0, 3, 7],
--5 -> [-1, 0],
--4 -> [2, 8, 9]
-];
-
-// ---------------------------------------------------------------
-
-var pattern = chordsPositions.collect { |pos, i|
-var lastIndex = chordsPositions.size - 1;
-var nextPos = if(i == lastIndex) {
-32
-}
-{
-chordsPositions[i + 1]
-};
-
-var dur = (nextPos - pos) * 0.125;
-var ev = (dur: dur);
-var bassIdx = bassPositions.indexOf(pos);
-
-ev[\note] = if(bassIdx.isNil) {
-dict.values.choose
-} {
-dict[ bassPattern[bassIdx][\note] ]
-};
-};
-
-pattern
-)
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

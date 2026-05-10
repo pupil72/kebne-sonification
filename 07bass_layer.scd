@@ -1,6 +1,4 @@
 (
-~tempo = TempoClock(64 / 60);
-~root = 60;
 {
 	var totData = [ Ref(0), Ref(0), Ref(0), Ref(0) ]; // [procs, thermal, memusage, IBtx]
 	var tempBatch = nil!4; // [procs, thermal, memusage, IBtx]
@@ -25,7 +23,7 @@
 			\instrument, \bass,
 			\octave, -2,
 			\root, ~root,
-			\amp, Pfunc({ ~amps[7].value }), // ~amps[6].value
+			\amp, Pfunc({ ~amps[7].value }),
 		);
 		makeBassPattern.(batchData[0].value, batchData[2].value, bass_sound);
 	};
