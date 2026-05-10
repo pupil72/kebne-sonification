@@ -40,9 +40,9 @@ Three metrics drive the musical mapping:
 
 ## Running the Project
 
-**Requirements:** SuperCollider. No additional libraries needed.
+**Requirements:** SuperCollider.
 
-**Launch:** run main.scd in SuperCollider.
+**Launch:** run main.scd.
 
 ---
 
