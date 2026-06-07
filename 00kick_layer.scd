@@ -48,7 +48,7 @@
 			pattern = pattern.add(( \dur: Rest(offset) )); //this add an extra event at the beginning which must be skipped later when applying regularity and bigness
 			positions.doAdjacentPairs { |a, b|
 				var ev = (\dur: (b - a) * 0.125);
-				if ([2, 6, 7, 10, 14, 15, 18, 22, 23, 26, 30, 31].includes(a) and: {~applyPatternVariations[1]}) {
+				if ([2, 6, 7, 10, 14, 15, 18, 22, 23, 26, 30, 31].includes(a) and: {~applyPatternVariations[0]}) {
 					ev[\amp] = 0.35;
 				};
 				pattern = pattern.add(ev);
